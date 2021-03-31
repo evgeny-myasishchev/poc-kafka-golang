@@ -1,11 +1,12 @@
 KAFKA_VERSION=2.7.0
 SCALA_VERSION=2.13
+CMAK_VERSION=3.0.0.5
 
 KAFKA_PACKAGE_VERSION=$(SCALA_VERSION)-$(KAFKA_VERSION)
 TGZ=kafka_$(KAFKA_PACKAGE_VERSION).tgz
 KAFKA_ROOT=tmp/kafka_$(KAFKA_PACKAGE_VERSION)
 
-.PHONY: kafka kafka_image
+.PHONY: kafka kafka_image cmak_image
 
 tmp:
 	mkdir -p tmp
@@ -22,3 +23,7 @@ kafka_image: $(KAFKA_ROOT)
 	docker build . -f docker/Dockerfile.kafka \
 		-t local/kafka:latest \
 		--build-arg KAFKA_PACKAGE_VERSION=$(KAFKA_PACKAGE_VERSION)
+
+cmak_image:
+	docker build . -f docker/Dockerfile.cmak \
+		--build-arg CMAK_VERSION=$(CMAK_VERSION)
