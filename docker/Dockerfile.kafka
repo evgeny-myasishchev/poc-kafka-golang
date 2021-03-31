@@ -1,6 +1,16 @@
-# Kafka image
-FROM openjdk:8-jre-slim-buster
+# Build stage
+FROM openjdk:11-jre-slim-buster as build
+ARG KAFKA_PACKAGE_VERSION
+
+RUN apt-get -y update && apt-get install -y make curl
+
+WORKDIR /root
+COPY Makefile /root
+RUN make kafka
+
+# Runtime stage
+FROM openjdk:11-jre-slim-buster
 ARG KAFKA_PACKAGE_VERSION
 
 WORKDIR /root/kafka_${KAFKA_PACKAGE_VERSION}
-COPY tmp/kafka_${KAFKA_PACKAGE_VERSION}/ /root/kafka_${KAFKA_PACKAGE_VERSION}
+COPY --from=build tmp/kafka_${KAFKA_PACKAGE_VERSION}/ /root/kafka_${KAFKA_PACKAGE_VERSION}
