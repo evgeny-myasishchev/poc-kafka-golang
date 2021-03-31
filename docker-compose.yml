@@ -8,7 +8,17 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - pluto_net
+      - kafka_net
+
+  cmak:
+    image: local/cmak:latest
+    command: bin/cmak
+    environment: 
+      ZK_HOSTS: "zookeeper:2181"
+    ports:
+      - "9000:9000"
+    networks:
+      - kafka_net
 
   zookeeper:
     image: local/kafka:latest
@@ -16,8 +26,8 @@ services:
     expose:
       - "2181"
     networks:
-      - pluto_net
+      - kafka_net
 
 networks:
-  pluto_net:
+  kafka_net:
     driver: bridge

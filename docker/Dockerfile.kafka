@@ -13,4 +13,4 @@ FROM openjdk:11-jre-slim-buster
 ARG KAFKA_PACKAGE_VERSION
 
 WORKDIR /root/kafka_${KAFKA_PACKAGE_VERSION}
-COPY --from=build tmp/kafka_${KAFKA_PACKAGE_VERSION}/ /root/kafka_${KAFKA_PACKAGE_VERSION}
+COPY --from=build /root/tmp/kafka_${KAFKA_PACKAGE_VERSION}/ /root/kafka_${KAFKA_PACKAGE_VERSION}
