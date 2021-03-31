@@ -28,3 +28,5 @@ cmak_image:
 	docker build . -f docker/Dockerfile.cmak \
 		-t local/cmak:latest \
 		--build-arg CMAK_VERSION=$(CMAK_VERSION)
+
+images: kafka_image cmak_image
