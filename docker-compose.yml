@@ -1,0 +1,23 @@
+version: "3"
+services:
+  kafka:
+    image: local/kafka:latest
+    command: bin/kafka-server-start.sh config/server.properties --override zookeeper.connect=zookeeper:2181
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - pluto_net
+
+  zookeeper:
+    image: local/kafka:latest
+    command: bin/zookeeper-server-start.sh config/zookeeper.properties
+    expose:
+      - "2181"
+    networks:
+      - pluto_net
+
+networks:
+  pluto_net:
+    driver: bridge

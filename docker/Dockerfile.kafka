@@ -1,0 +1,6 @@
+# Kafka image
+FROM openjdk:8-jre-slim-buster
+ARG KAFKA_PACKAGE_VERSION
+
+WORKDIR /root/kafka_${KAFKA_PACKAGE_VERSION}
+COPY tmp/kafka_${KAFKA_PACKAGE_VERSION}/ /root/kafka_${KAFKA_PACKAGE_VERSION}

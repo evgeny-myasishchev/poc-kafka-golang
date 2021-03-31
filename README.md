@@ -1,3 +1,15 @@
-curl https://apache.ip-connect.vn.ua/kafka/2.7.0/kafka_2.13-2.7.0.tgz --output kafka_2.13-2.7.0.tgz
+# POC to experiment with kafka ang golang
 
-tar -xvvf kafka_2.13-2.7.0.tgz
+Assuming docker and compose are installed.
+
+Prepare kafka image:
+```sh
+make kafka_image
+```
+
+Run kafka:
+```sh
+docker-compose up -d kafka
+```
+
+You now have kafka up and running on port `9092`
